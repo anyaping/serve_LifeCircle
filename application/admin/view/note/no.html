@@ -1,0 +1,144 @@
+
+                {volist name='results' id='vo'}
+                    <tr class="active">
+                        <td>{$vo['id']}</td>
+                        <td>{$vo['note_title']}</td>
+                        <td><img width="50px" height="50px" src= "__LOGO__{$vo['note_img']}"></td>
+                        <td>{$vo['note_content']}</td>
+                        <td>{$vo['note_auth']}</td>
+                        <td>{$vo['column_name']}</td>
+                        <td>{$vo['note_time']|date='Y-m-d',###}</td>
+                        <td>{eq name="$vo['note_status']" value="1"}审核通过{else/}待审核{/eq}</td>
+                        <td>{eq name="$vo['note_stick']" value="1"}已置顶{else/}待置顶{/eq}</td>
+                        <td>{eq name="$vo['note_points']" value="1"}领积分{else/}没有积分{/eq}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger del" value="{$vo['id']}">删除</button>
+                            <button type="button" class="btn btn-danger edit" value="{$vo['id']}">修改</button>
+                            <button type="button" class="btn btn-danger release" value="{$vo['id']}">通过审核</button>
+                            <button type="button" class="btn btn-danger stick" value="{$vo['id']}">置顶</button>
+                            <button type="button" class="btn btn-danger points" value="{$vo['id']}">领积分</button>
+                        </td>
+                    </tr>
+                {/volist}
+
+                                <script type="text/javascript" src="__STYLE__admin/js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="__STYLE__admin/js/layer.js"></script>
+
+    <script type="text/javascript">
+    //jquery的入口
+    $(function(){
+
+        //点击删除
+        $('.del').click(function(){
+            var id = $(this).val(); 
+            $.ajax({
+                url: "{:url('note/del')}",    //请求地址
+                data:{
+                    id:id
+                },
+                type:"get",
+                success:function(data){ //成功自动调用的回调函数
+                    if(data == "1"){
+                        alert("删除成功");
+                        window.location.reload();
+                    }else if(data == "0"){
+                        alert("删除失败");
+                    }else if(data == "id为空"){
+                        alert("id为空");
+                    }
+                },
+                error:function(){
+                    alert("ajax请求失败！");
+                }
+            });
+        });
+
+        //点击修改
+        $('.edit').click(function(){
+            var id = $(this).attr('value')
+            layer.open({
+                type: 2,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['55%', '60%'], //宽高
+                content: "edit?id="+id
+            });
+        });
+
+        //点击通过审核
+        $('.release').click(function(){
+            var id = $(this).val(); 
+            $.ajax({
+                url: "{:url('note/release')}",    //请求地址
+                data:{
+                    id:id
+                },
+                type:"get",
+                success:function(data){ //成功自动调用的回调函数
+                    if(data == "1"){
+                        alert("审核通过");
+                        window.location.reload();
+                    }else if(data == "-1"){
+                        alert("设置失败");
+                    }
+                },
+                error:function(){
+                    alert("ajax请求失败！");
+                }
+            });
+        });
+
+        //点击置顶
+        $('.stick').click(function(){
+            var id = $(this).val(); 
+            $.ajax({
+                url: "{:url('note/stick')}",    //请求地址
+                data:{
+                    id:id
+                },
+                type:"get",
+                success:function(data){ //成功自动调用的回调函数
+                    if(data == "1"){
+                        alert("置顶成功");
+                        window.location.reload();
+                    }else if(data == "0"){
+                        alert("取消置顶成功");
+                        window.location.reload();
+                    }else if(data == "-1"){
+                        alert("设置失败");
+                    }
+                },
+                error:function(){
+                    alert("ajax请求失败！");
+                }
+            });
+        });
+
+        //点击领积分
+        $('.points').click(function(){
+            var id = $(this).val(); 
+            $.ajax({
+                url: "{:url('note/points')}",    //请求地址
+                data:{
+                    id:id
+                },
+                type:"get",
+                success:function(data){ //成功自动调用的回调函数
+                    if(data == "1"){
+                        alert("设置领积分成功");
+                        window.location.reload();
+                    }else if(data == "0"){
+                        alert("取消领积分成功");
+                        window.location.reload();
+                    }else if(data == "-1"){
+                        alert("设置失败");
+                    }
+                },
+                error:function(){
+                    alert("ajax请求失败！");
+                }
+            });
+        });
+
+
+    });
+</script>

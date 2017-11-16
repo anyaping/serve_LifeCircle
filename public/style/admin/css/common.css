@@ -1,0 +1,7 @@
+*{
+width:1200px;padding:0px;margin:0px auto;
+}
+ol,ul,li{
+list-style: none;
+}
+a { color:#333; text-decoration:none; }

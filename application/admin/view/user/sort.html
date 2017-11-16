@@ -1,0 +1,18 @@
+
+                {volist name='results' id='vo'}
+                    <tr class="active">
+                        <td>{$vo['id']}</td>
+                        <td><img width="50px" height="50px" src= "__LOGO__{$vo['img']}"></td>
+                        <td>{$vo['name']}</td>
+                        <td>{$vo['abstract']}</td>
+                        <td>{$vo['sex']}</td>
+                        <td>{$vo['birthday']}</td>
+                        <td>{$vo['address1']}</td>
+                        <td>{$vo['address2']}</td>
+                        <td>{$vo['level']}</td>
+                        <td>{$vo['phone']}</td>
+                        <td>{$vo['email']}</td>
+                        <td>{$vo['money']}</td>
+                        <td>{$vo['time']|date='Y-m-d',###}</td>
+                    </tr>
+                {/volist}

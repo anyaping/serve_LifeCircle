@@ -1,0 +1,86 @@
+<script type="text/javascript" src="__STYLE__admin/js/jquery-3.2.0.min.js"></script>
+<style type="text/css">
+	.menu_left{
+		float:left;
+		width: 150px;
+		height: 100%;
+		background-color: #dfc;
+	}
+	ol{
+		margin-top: 20px;
+		margin-left: -20px;
+		list-style: none;
+	}
+	.ol_li{
+		height: 35px;
+		width: 100%;
+		line-height: 35px;
+		color: blue;
+		cursor: pointer;
+	}
+	ul{
+		display: none;
+	}
+	ul li{
+		margin-left: -10px;
+		line-height: 35px;
+		cursor: pointer;
+	}
+	.active{
+		color: #ddd;
+	}
+	.bill{
+		margin-top: 20px;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;
+	}
+</style>
+<div class="menu_left">
+	<div class="bill">菜单导航</div>
+	<ol>
+		<li class="ol_li">栏目管理</li>
+			<ul>
+				<li class="test" id="/admin/column/index" onclick="loadUrl(this.id)">栏目列表</li>
+				<li class="test" id="/admin/twocolumn/index" onclick="loadUrl(this.id)">二级栏目</li>
+			</ul>
+		<li class="ol_li">轮播图管理</li>
+			<ul>
+				<li class="test" id="/admin/carousel/index" onclick="loadUrl(this.id)">轮播图列表</li>
+			</ul>
+		<li class="ol_li">帖子管理</li>
+			<ul>
+				<li class="test" id="/admin/note/index" onclick="loadUrl(this.id)">帖子列表</li>
+			</ul>
+		<li class="ol_li">用户管理</li>
+			<ul>
+				<li class="test" id="/admin/user/index" onclick="loadUrl(this.id)">用户列表</li>
+			</ul>
+		<li class="ol_li">话题管理</li>
+			<ul>
+				<li class="test" id="/admin/topic/index" onclick="loadUrl(this.id)">话题列表</li>
+			</ul>
+		<li class="ol_li">反馈管理</li>
+			<ul>
+				<li class="test" id="/admin/back/index" onclick="loadUrl(this.id)">用户反馈列表</li>
+			</ul>
+	</ol>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$('.ol_li').click(function(){
+			console.log($(this))
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$(this).next('ul').hide(500);
+				return;
+			}
+
+			$(this).siblings().removeClass('active');
+			$(this).siblings().next('ul').hide(500);
+			$(this).addClass('active');
+			$(this).next('ul').show(500)
+		})
+	})
+</script>
